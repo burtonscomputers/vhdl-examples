@@ -16,3 +16,6 @@ BEGIN
         y <= std_logic_vector(UNSIGNED(a) + UNSIGNED(b));
     END PROCESS;
 END sum_estructure;
+
+--ghdl -a -Wc,-m32 -Wa,--32 nombre.vhdl
+--Para maquinas de 64bits 

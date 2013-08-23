@@ -14,4 +14,5 @@ ARCHITECTURE test_signext_arq OF test_signext is
 BEGIN
     ronda1: signext PORT MAP (a, y);
     a <= x"1111" AFTER 5 fs, x"22FB" AFTER 10 fs, x"AA91" AFTER 15 fs;
+
 END test_signext_arq;
