@@ -11,13 +11,13 @@ ARCHITECTURE t_flopr OF test_flopr IS
               q: OUT std_logic_vector(31 DOWNTO 0));
     END COMPONENT;
     SIGNAL d: std_logic_vector(31 DOWNTO 0);
-    SIGNAL clk: std_logic;
+    SIGNAL clk: std_logic := '0';
     SIGNAL reset: std_logic;
     SIGNAL q: std_logic_vector(31 DOWNTO 0);
 
 BEGIN
     u0: flopr PORT MAP (d, clk, reset, q);
-    d <= x"FF000500" after 0 fs, x"AA937110" after 10 fs;
-    clk <= '1' after 0 fs;
-    reset <= '0' after 0 fs, '1' after 5 fs, '0' after 10 fs, '0' after 15 fs;
+    d <= x"FF000500" after 0 fs, x"AA937110" after 10 fs, x"FFFFFFFF" after 23 fs;
+    clk <= not clk after 5 fs;
+    reset <= '0' after 0 fs, '1' after 5 fs, '0' after 10 fs, '0' after 15 fs, '1' after 27 fs;
 END t_flopr;
