@@ -10,16 +10,25 @@ ENTITY ALU IS
           result: OUT std_logic_vector(31 DOWNTO 0));
 END ALU;
 
-ARCHITECTURE ALU_arq OF ALU IS
+ARCHITECTURE ALU_arq OF ALU IS    
 BEGIN
     PROCESS(a, b, alucontrol)
         VARIABLE temp: std_logic_vector(31 DOWNTO 0);    
     BEGIN
         CASE alucontrol IS
-            WHEN "000" => temp:= UNSIGNED(a) AND UNSIGNED(b);
-            WHEN "001" => temp:= UNSIGNED(a) AND UNSIGNED(b);
-            WHEN "010" => temp:= UNSIGNED(a) + UNSIGNED(b);
-            WHEN "100" => temp:= UNSIGNED(a) AND (NOT UNSIGNED(b));
-            WHEN "101" => temp:= UNSIGNED(a) OR (NOT UNSIGNED(b));
-            WHEN "110" => temp:= UNSIGNED(a) - UNSIGNED(b);
-            WHEN "111" => temp:= SLT
+            WHEN "000" => temp:= a AND b;
+            WHEN "001" => temp:= a OR b;
+            WHEN "010" => temp:= std_logic_vector(UNSIGNED(a) + UNSIGNED(b));
+            WHEN "100" => temp:= a AND (NOT b);
+            WHEN "101" => temp:= a OR (NOT b);
+            WHEN "110" => temp:= std_logic_vector(UNSIGNED(a) - UNSIGNED(b));
+            WHEN OTHERS => temp:= x"00000000";
+        END CASE;
+        result <= temp;
+        IF temp=x"00000000" THEN
+            zero <= '1';
+        ELSIF temp=x"00000001" THEN
+            zero <= '0';
+        END IF;
+    END PROCESS;
+END ARCHITECTURE;
