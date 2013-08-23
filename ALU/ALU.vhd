@@ -18,11 +18,18 @@ BEGIN
         CASE alucontrol IS
             WHEN "000" => temp:= a AND b;
             WHEN "001" => temp:= a OR b;
-            WHEN "010" => temp:= std_logic_vector(UNSIGNED(a) + UNSIGNED(b));
+            WHEN "010" => temp:= std_logic_vector(unsigned(a) + unsigned(b));
+            WHEN "011" => temp := "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU";
             WHEN "100" => temp:= a AND (NOT b);
             WHEN "101" => temp:= a OR (NOT b);
-            WHEN "110" => temp:= std_logic_vector(UNSIGNED(a) - UNSIGNED(b));
-            WHEN OTHERS => temp:= x"00000000";
+            WHEN "110" => temp:= std_logic_vector(unsigned(a) - unsigned(b));
+            WHEN "111" => 
+                IF a<b THEN 
+                    temp := x"00000001";
+                ELSE
+                    temp := x"00000000";
+                END IF;
+            WHEN OTHERS => temp := "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU";
         END CASE;
         result <= temp;
         IF temp=x"00000000" THEN
