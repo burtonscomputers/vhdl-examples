@@ -13,11 +13,13 @@ architecture imem_arq of imem is
     process(a)
         variable my_mem: mem ;
         variable t1: std_logic_vector(31 downto 0);
+        variable pos_a: integer;
     begin
         for pos in 0 to 63 loop
-            t1 := std_logic_vector(to_unsigned(pos, 32));
+            t1 := std_logic_vector(to_unsigned(pos, 32)); --integer to logic_v
             my_mem(pos) := t1;
         end loop;
-            y <= x"ffffffff";
+            pos_a := to_integer(unsigned(a)); --logic_vector to integer
+            y <= my_mem(pos_a);
     end process;
 end architecture;
