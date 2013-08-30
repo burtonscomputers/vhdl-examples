@@ -1,26 +1,22 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
 
-ENTITY maindec IS
-    GENERIC (n: INTEGER := 6;
-             m: INTEGER := 2);
-    PORT (Op: IN STD_LOGIC_VECTOR ((n-1) DOWNTO 0);
+entity maindec is
+    port (Op: in std_logic_vector(5 downto 0);
           MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, 
-          Jump: OUT STD_LOGIC;
-          AluOp: OUT STD_LOGIC_VECTOR((m-1) DOWNTO 0));
-END maindec;
+          Jump: out std_logic;
+          AluOp: out std_logic_vector(1 downto 0));
+end entity;
 
----------------------------------------------------------
-
-ARCHITECTURE arch1 OF maindec IS
-    SIGNAL parcial_result: STD_LOGIC_VECTOR(8 DOWNTO 0);
-BEGIN
-    parcial_result <= ("110000010") WHEN (Op = "000000") ELSE
-                      ("101001000") WHEN (Op = "100011") ELSE
-                      ("001010000") WHEN (Op = "101011") ELSE
-                      ("000100001") WHEN (Op = "000100") ELSE
-                      ("101000000") WHEN (Op = "001000") ELSE
-                      ("000000100") WHEN (Op = "000010") ELSE
+architecture arq_maindec of maindec is
+    signal parcial_result: std_logic_vector(8 downto 0);
+begin
+    parcial_result <= ("110000010") when (Op = "000000") else
+                      ("101001000") when (Op = "100011") else
+                      ("001010000") when (Op = "101011") else
+                      ("000100001") when (Op = "000100") else
+                      ("101000000") when (Op = "001000") else
+                      ("000000100") when (Op = "000010") else
                       ("---------");
 
     RegWrite <= parcial_result(8);
@@ -30,6 +26,6 @@ BEGIN
     MemWrite <= parcial_result(4);
     MemToReg <= parcial_result(3);
     Jump <= parcial_result(2);
-    AluOp <= parcial_result(1 DOWNTO 0);
+    AluOp <= parcial_result(1 downto 0);
 
-END arch1;
+end architecture;
