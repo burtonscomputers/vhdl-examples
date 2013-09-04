@@ -1,3 +1,6 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
 package components is
     component aludec
         port (funct: in std_logic_vector(5 downto 0);
