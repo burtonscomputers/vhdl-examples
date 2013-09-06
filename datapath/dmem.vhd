@@ -7,7 +7,7 @@ use ieee.numeric_std.all;
 entity dmem is
     port (a: in std_logic_vector(31 downto 0);
           wd: in std_logic_vector(31 downto 0);
-          clk, we: in bit;
+          clk, we: in std_logic;
           rd: out std_logic_vector(31 downto 0));
 end entity;
 
