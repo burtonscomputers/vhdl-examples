@@ -8,18 +8,18 @@ package components is
               y: out std_logic_vector(31 downto 0));
     end component;
 
-    entity ALU
+    component ALU
         port (a: in std_logic_vector(31 downto 0);
               b: in std_logic_vector(31 downto 0);
-              alucontrol: in bit_vector(2 downto 0);
-              zero: out bit;
+              alucontrol: in std_logic_vector(2 downto 0);
+              zero: out std_logic;
               result: out std_logic_vector(31 downto 0));
     end component;
 
     component dmem 
         port (a: in std_logic_vector(31 downto 0);
               wd: in std_logic_vector(31 downto 0);
-              clk, we: in bit;
+              clk, we: in std_logic;
               rd: out std_logic_vector(31 downto 0));
     end component;
 

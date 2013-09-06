@@ -5,8 +5,8 @@ USE IEEE.NUMERIC_STD.ALL;
 ENTITY ALU IS
     PORT (a: IN std_logic_vector(31 DOWNTO 0);
           b: IN std_logic_vector(31 DOWNTO 0);
-          alucontrol: IN bit_vector(2 DOWNTO 0);
-          zero: OUT bit;
+          alucontrol: IN std_logic_vector(2 DOWNTO 0);
+          zero: OUT std_logic;
           result: OUT std_logic_vector(31 DOWNTO 0));
 END ALU;
 
