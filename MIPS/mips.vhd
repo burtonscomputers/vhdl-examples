@@ -13,9 +13,9 @@ architecture arq_mips of mips is
     signal instr1, pc1: std_logic_vector(31 downto 0);
     signal MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, 
         Jump: std_logic;
-    signal AluControl: std_logic_vector(2 downto 0));
+    signal AluControl: std_logic_vector(2 downto 0);
 begin
-    a0: controller port map(Op=>instr1(31 downto 26), Funct=>instr1(5 downto 0)
+    a0: controller port map(instr1(31 downto 26),instr1(5 downto 0), 
                     MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, 
                     Jump, AluControl);
     a1: datapath port map(MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, 
