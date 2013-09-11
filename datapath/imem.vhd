@@ -24,8 +24,6 @@ use STD.TEXTIO.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;  
 use IEEE.STD_LOGIC_ARITH.all;
 
-library WORK;
-use WORK.components.all;
 
 entity imem is -- instruction memory
   port(a:  in  STD_LOGIC_VECTOR(5 downto 0);
@@ -35,7 +33,7 @@ end;
 architecture behave of imem is
 
 constant MAX_BOUND: Integer := 64;
---constant MIPS_SOFT_FILE: string := "mips_pipeline.dat";
+constant MIPS_SOFT_FILE: string := "mips_pipeline.dat";
 
 begin
   process is
