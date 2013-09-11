@@ -17,10 +17,10 @@ package components is
     end component;
 
     component dmem 
-        port (a: in std_logic_vector(31 downto 0);
-              wd: in std_logic_vector(31 downto 0);
-              clk, we: in std_logic;
-              rd: out std_logic_vector(31 downto 0));
+        port(clk, we: in std_logic;
+              a, wd: in std_logic_vector(31 downto 0);
+              rd: out std_logic_vector(31 downto 0);
+              dump: in std_logic);
     end component;
 
     component flopr
@@ -30,8 +30,8 @@ package components is
     end component;
 
     component imem
-        port (a: in std_logic_vector(5 downto 0);
-              y: out std_logic_vector(31 downto 0));
+        port(a:  in  std_logic_vector(5 downto 0);
+             rd: out std_logic_vector(31 downto 0));
     end component;
 
     component mux2 

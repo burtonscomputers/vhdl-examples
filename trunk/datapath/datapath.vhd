@@ -30,7 +30,7 @@ begin
     a1: mux2 port map(d0=>PCNext, d1=>PCJump, s=>Jump, y=>PC1);
     a2: flopr port map(d=>PC1, clk=>clk, reset=>reset, q=>PC1);
     a3: adder port map(a=>PC1, b=>x"00000100", y=>PCPlus4);
-    a4: imem port map(a=>PC1(7 downto 2), y=>Instr1);
+    a4: imem port map(a=>PC1(7 downto 2), rd=>Instr1);
     a5: regfile port map(ra1=>Instr1(25 downto 21), ra2=>Instr1(20 downto 16),
                         wa3=>WriteReg, wd3=>Result, we3=>RegWrite, clk=>clk,
                         rd1=>SrcA, rd2=>WriteData);
@@ -43,7 +43,7 @@ begin
     a11: ALU port map(a=>SrcA, b=>SrcB, alucontrol=>AluControl, zero=>zero,
                     result=>ALUResult);
     a12: dmem port map(a=>ALUResult, wd=>WriteData, clk=>clk, we=>MemWrite,
-                    rd=>ReadData);
+                    rd=>ReadData, dump=>dump);
     a13: mux2 port map(d0=>ALUResult, d1=>ReadData, s=>MemToReg, y=>Result);
     pc <= PC1;
     instr <= Instr1;
