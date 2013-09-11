@@ -9,12 +9,12 @@ architecture test_ALU_arq of test_ALU is
         port (a: in std_logic_vector(31 downto 0);
               b: in std_logic_vector(31 downto 0);
               alucontrol: in bit_vector(2 downto 0);
-              zero: out bit;
+              zero: out std_logic;
               result: out std_logic_vector(31 downto 0));
     end component;
     signal a, b, result: std_logic_vector(31 downto 0);
     signal alucontrol: bit_vector(2 downto 0);
-    signal zero: bit;
+    signal zero: std_logic;
 begin
     u0: ALU port map(a, b, alucontrol, zero, result);
     process
