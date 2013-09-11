@@ -22,9 +22,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use STD.TEXTIO.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
-
-library WORK;
-use WORK.components.all;
+use ieee.numeric_std.all;
 
 entity dmem is -- data memory
   port(clk, we:  in STD_LOGIC;
@@ -35,7 +33,7 @@ entity dmem is -- data memory
 end;
 
 architecture behave of dmem is
- --constant MEMORY_DUMP_FILE: string := "output.dump";
+ constant MEMORY_DUMP_FILE: string := "output.dump";
  constant MAX_BOUND: Integer := 64;
  
  type ramtype is array (MAX_BOUND-1 downto 0) of STD_LOGIC_VECTOR(31 downto 0);
@@ -53,7 +51,7 @@ procedure memDump is
      while i <= MAX_BOUND-1 loop        
 		  write(dumpline, i);
 		  write(dumpline, string'(" "));
-		  write(dumpline, conv_integer(mem(i)));		  
+		  write(dumpline, to_integer(unsigned(mem(i))));
 		  writeline(dumpfile,dumpline);
        i:=i+1;
      end loop;
@@ -63,9 +61,9 @@ begin
    process(clk, a, mem)
 	begin 
 	  if clk'event and clk = '1' and we = '1' then
-				mem(conv_integer(a(7 downto 2))) <= wd;
+				mem(to_integer(unsigned((a(7 downto 2))))) <= wd;
 	  end if;
-	   rd <= mem(conv_integer(a(7 downto 2))); -- word aligned
+	   rd <= mem(to_integer(unsigned(a(7 downto 2)))); -- word aligned
 	end process;
 	
 	process(dump)
