@@ -7,79 +7,57 @@ end entity;
 
 
 architecture TB of datapath_tb is
-	component datapath
-	port (
-		MemToReg : in std_logic;
-		MemWrite : in std_logic;
-		Branch : in std_logic;
-		AluSrc : in std_logic;
-		RegDst : in std_logic;
-		RegWrite : in std_logic;
-		Jump : in std_logic;
-		AluControl : in std_logic_vector(2 downto 0);
-		dump : in std_logic;
+    component datapath 
+        port (MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, Jump,
+              dump, reset, clk: in std_logic;
+              AluControl: in std_logic_vector(2 downto 0);
+              pc, instr: out std_logic_vector(31 downto 0));
+    end component;
 
-		pc : out std_logic_vector(31 downto 0);
-		instr : out std_logic_vector(31 downto 0);
+    signal MemToReg1, MemWrite1, Branch1, AluSrc1, RegDst1, RegWrite1, Jump1,
+            dump1, reset1, clk1 : std_logic;
+    signal AluControl1 : std_logic_vector(2 downto 0);
+    signal pc1, instr1 : std_logic_vector(31 downto 0);
 
-		reset : in std_logic;
-		clk : in std_logic
-	);
-	end component;
+    begin
+    dut : datapath port map (
+                        MemToReg => MemToReg1,
+                        MemWrite => MemWrite1,
+                        Branch => Branch1,
+                        AluSrc => AluSrc1,
+                        RegDst => RegDst1,
+                        RegWrite => RegWrite1,
+                        Jump => Jump1,
+                        AluControl => AluControl1,
+                        dump => dump1,
+                        pc => pc1,
+                        instr => instr1,
+                        reset => reset1,
+                        clk => clk1
+                    );
 
-	signal MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, Jump,
-			 dump, reset, clk : std_logic;
-	signal AluControl : std_logic_vector(2 downto 0);
-	signal pc, instr : std_logic_vector(31 downto 0);
+    process begin
+        clk1 <= '1';
+        wait for 5 ns;
+        clk1 <= '0';
+        wait for 5 ns;
+    end process;
 
-	begin
-	dut : datapath port map (
-						MemToReg => MemToReg,
-						MemWrite => MemWrite,
-						Branch => Branch,
-						AluSrc => AluSrc,
-						RegDst => RegDst,
-						RegWrite => RegWrite,
-						Jump => Jump,
-						AluControl => AluControl,
-						dump => dump,
-						pc => pc,
-						instr => instr,
-						reset => reset,
-						clk => clk
-					);
-
-	process begin
-		clk <= '1';
-		wait for 5 ns;
-		clk <= '0';
-		wait for 5 ns;
-	end process;
-
-	process begin
-		--STORE WORD--
-		MemToReg <= '1';
-		MemWrite <= '1';
-		Branch <= '1'; --??
-		AluSrc <= '1';
-		RegDst <= '0'; --??
-		RegWrite <= '0';
-		Jump <= '1';	
-		AluControl <= "010";
-		wait for 20 ns;
-		dump <= '1';
-		wait for 20 ns;
-		dump <= '0';
-		
-
-	end process;
+    process begin
+        --STORE WORD--
+        MemToReg1 <= '1';
+        MemWrite1 <= '1';
+        Branch1 <= '1'; --??
+        AluSrc1 <= '1';
+        RegDst1 <= '0'; --??
+        RegWrite1 <= '0';
+        Jump1 <= '1';
+        AluControl1 <= "010";
+        wait for 20 ns;
+        dump1 <= '1';
+        wait for 20 ns;
+        dump1 <= '0';
+    end process;
 
 
 end TB;
-
-
-
-
-					
-
-
