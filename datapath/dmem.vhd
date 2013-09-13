@@ -21,8 +21,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use STD.TEXTIO.all;
-use IEEE.STD_LOGIC_UNSIGNED.all;
-use ieee.numeric_std.all;
+--use IEEE.STD_LOGIC_UNSIGNED.all;
+use IEEE.NUMERIC_STD.all;
 
 entity dmem is -- data memory
   port(clk, we:  in STD_LOGIC;

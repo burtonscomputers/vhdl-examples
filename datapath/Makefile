@@ -15,6 +15,12 @@ NAME5 = mux2.vhd
 NAME6 = regfile.vhd
 NAME7 = signext.vhd
 NAME8 = sl2.vhd
+NAME9 = components.vhd
+NAME10 = datapath.vhd
+NAME11 = datapath_tb.vhd
+NAME12 = datapath_tb
+STOP_TIME = --stop-time=200ns
+VCD_FILE = --vcd=data.vcd
 #--------------------------------------------------
 
 all: vhdl
@@ -29,7 +35,11 @@ vhdl:
 	$(GHDL) $(ANALIZE) $(NAME6) 
 	$(GHDL) $(ANALIZE) $(NAME7) 
 	$(GHDL) $(ANALIZE) $(NAME8) 
-
+	$(GHDL) $(ANALIZE) $(NAME9) 
+	$(GHDL) $(ANALIZE) $(NAME10) 
+	$(GHDL) $(ANALIZE) $(NAME11) 
+	$(GHDL) $(ELABORATE) $(NAME12)
+	$(GHDL) $(RUN) $(NAME12) $(STOP_TIME) $(VCD_FILE)   
 
 clean:
-	rm *.s *.o *.cf *.lst *.vcd $(NAMETB)
+	rm -f *.o *.cf *.vcd $(NAMETB)

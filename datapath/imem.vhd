@@ -21,7 +21,7 @@
 library IEEE; 
 use IEEE.STD_LOGIC_1164.all; 
 use STD.TEXTIO.all;
-use IEEE.STD_LOGIC_UNSIGNED.all;  
+--use IEEE.STD_LOGIC_UNSIGNED.all;  
 use IEEE.STD_LOGIC_ARITH.all;
 
 
@@ -69,7 +69,7 @@ begin
 
     -- read memory
     loop
-      rd <= mem(CONV_INTEGER(a));
+      rd <= mem(CONV_INTEGER(unsigned(a)));
       wait on a;
     end loop;
   end process;
