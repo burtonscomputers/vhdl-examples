@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
-use work.components.all;
+use work.components1.all;
 
 entity controller is
     port (Op, Funct: in std_logic_vector(5 downto 0);
