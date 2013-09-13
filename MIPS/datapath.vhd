@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 library work;
-use work.components.all;
+use work.components2.all;
 
 entity datapath is
     port (MemToReg, MemWrite, Branch, AluSrc, RegDst, RegWrite, Jump,
@@ -24,9 +24,9 @@ architecture arq_datapath of datapath is
     signal WriteReg: std_logic_vector(4 downto 0);
     signal zero: std_logic;
 begin
-    PCSrc <= Branch and '0';
+    PCSrc <= Branch and zero;
     a0: mux2 port map(d0=>PCNext, d1=>PCBranch, s=>PCSrc, y=>PCNext);
-    PCJump <= PCPlus4(31 downto 28) and Instr1(25 downto 0) and "00";
+    PCJump <= PCPlus4(31 downto 28) & Instr1(25 downto 0) & "00";
     a1: mux2 port map(d0=>PCNext, d1=>PCJump, s=>Jump, y=>PC1);
     a2: flopr port map(d=>PC1, clk=>clk, reset=>reset, q=>PC1);
     a3: adder port map(a=>PC1, b=>x"00000100", y=>PCPlus4);
